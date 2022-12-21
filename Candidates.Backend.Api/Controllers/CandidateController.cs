@@ -21,7 +21,10 @@ namespace Candidates.Backend.Api.Controllers
             try
             {
                 var result = await _candidateService.GetAllCandidatesAsync();
-
+                if (result.Count == 0)
+                {
+                    return NoContent();
+                }
                 return Ok(result);
             }
             catch (Exception e)
@@ -36,6 +39,8 @@ namespace Candidates.Backend.Api.Controllers
             try
             {
                 var result = await _candidateService.GetByIdAsync(candidateId);
+                
+                if (result == null) return NoContent();
 
                 return Ok(result);
             }
@@ -52,6 +57,8 @@ namespace Candidates.Backend.Api.Controllers
             {
                 var result = await _candidateService.SaveAsync(candidate);
 
+                if (result == null) return NoContent();
+
                 return Ok(result.CandidateId);
             }
             catch (Exception e)
@@ -66,6 +73,8 @@ namespace Candidates.Backend.Api.Controllers
             try
             {
                 var result = await _candidateService.UpdateCandidateAsync(candidateId, candidate);
+                
+                if (!result) return BadRequest();
 
                 return Ok(result);
             }

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.Api", "Candidates.Backend.Api\Candidates.Backend.Api.csproj", "{26DA3B53-7050-4251-92CB-88F9CFF626A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.Api", "Candidates.Backend.Api\Candidates.Backend.Api.csproj", "{26DA3B53-7050-4251-92CB-88F9CFF626A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.Infrastructure", "Candidates.Backend.Infrastructure\Candidates.Backend.Infrastructure.csproj", "{4C27233B-3270-4D59-B681-4F771E061E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.Infrastructure", "Candidates.Backend.Infrastructure\Candidates.Backend.Infrastructure.csproj", "{4C27233B-3270-4D59-B681-4F771E061E6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.Domain", "Candidates.Backend.Domain\Candidates.Backend.Domain.csproj", "{94C29921-386D-4DB7-AF30-CB41DF91809F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.Domain", "Candidates.Backend.Domain\Candidates.Backend.Domain.csproj", "{94C29921-386D-4DB7-AF30-CB41DF91809F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.Application", "Candidates.Backend.Application\Candidates.Backend.Application.csproj", "{DD863480-38B1-436F-B281-2C18806F54CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.Application", "Candidates.Backend.Application\Candidates.Backend.Application.csproj", "{DD863480-38B1-436F-B281-2C18806F54CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.TestApi", "Candidates.Backend.TestApi\Candidates.Backend.TestApi.csproj", "{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DD863480-38B1-436F-B281-2C18806F54CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD863480-38B1-436F-B281-2C18806F54CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD863480-38B1-436F-B281-2C18806F54CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
