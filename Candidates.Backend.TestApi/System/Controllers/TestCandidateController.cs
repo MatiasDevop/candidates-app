@@ -7,7 +7,6 @@ using Candidates.Backend.TestApi.MockData;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Collections.Generic;
 
 namespace Candidates.Backend.TestApi.System.Controllers
 {

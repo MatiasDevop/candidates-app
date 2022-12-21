@@ -1,5 +1,4 @@
-﻿
-using Candidates.Backend.Application.Candidates;
+﻿using Candidates.Backend.Application.Candidates;
 using Candidates.Backend.Application.Exceptions;
 using Candidates.Backend.Domain.Entities;
 using Candidates.Backend.Infrastructure;
