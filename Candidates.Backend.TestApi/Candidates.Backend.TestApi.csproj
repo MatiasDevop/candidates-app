@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="System\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Candidates.Backend.Api\Candidates.Backend.Api.csproj" />
     <ProjectReference Include="..\Candidates.Backend.Application\Candidates.Backend.Application.csproj" />
     <ProjectReference Include="..\Candidates.Backend.Domain\Candidates.Backend.Domain.csproj" />

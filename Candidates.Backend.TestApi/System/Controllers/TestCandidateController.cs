@@ -1,18 +1,31 @@
-﻿using Candidates.Backend.Api.Controllers;
+﻿using AutoMapper;
+using Candidates.Backend.Api.Controllers;
+using Candidates.Backend.Api.Helpers;
 using Candidates.Backend.Application.Candidates;
+using Candidates.Backend.Application.Dtos;
 using Candidates.Backend.TestApi.MockData;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System.Collections.Generic;
 
 namespace Candidates.Backend.TestApi.System.Controllers
 {
     public class TestCandidateController
     {
         private readonly Mock<ICandidateService> _candidateService;
-
+        private readonly IMapper _mapper;
         public TestCandidateController()
         {
+            if (_mapper == null)
+            {
+                var mappingConfig = new MapperConfiguration(mc =>
+                {
+                    mc.AddProfile(new MappingProfiles());
+                });
+                IMapper mapper = mappingConfig.CreateMapper();
+                _mapper = mapper;
+            }
             _candidateService = new Mock<ICandidateService>();
         }
 
@@ -20,7 +33,7 @@ namespace Candidates.Backend.TestApi.System.Controllers
         public async Task GetAllAsync_ShouldReturnSuccess()
         {
             //Arrange
-            var listCandidates = CandidateMockData.GetCandidates();
+            var listCandidates = _mapper.Map<List<CandidateDto>>(CandidateMockData.GetCandidates());
             _candidateService.Setup(x => x.GetAllCandidatesAsync()).ReturnsAsync(listCandidates);
 
             var sut = new CandidateController(_candidateService.Object);
@@ -36,7 +49,7 @@ namespace Candidates.Backend.TestApi.System.Controllers
         public async Task GetAllAsync_ShouldReturnNoContentStatus()
         {
             //Arrange
-            var listCandidates = CandidateMockData.EmptyList();
+            var listCandidates = _mapper.Map<List<CandidateDto>>(CandidateMockData.EmptyList());
             _candidateService.Setup(x => x.GetAllCandidatesAsync()).ReturnsAsync(listCandidates);
             var sut = new CandidateController(_candidateService.Object);
 
@@ -95,7 +108,7 @@ namespace Candidates.Backend.TestApi.System.Controllers
         public async Task GetByIdAsync_ShouldReturnNotContentResult()
         {
             //Arrange
-            var listCandidates = CandidateMockData.EmptyList();
+            var listCandidates = _mapper.Map<List<CandidateDto>>(CandidateMockData.EmptyList());
             _candidateService.Setup(x => x.GetAllCandidatesAsync()).ReturnsAsync(listCandidates);
             var sut = new CandidateController(_candidateService.Object);
             var candidateId = new Guid("a63797fa-1c14-438c-8df9-7a07d83090ed");
@@ -111,7 +124,7 @@ namespace Candidates.Backend.TestApi.System.Controllers
         public async Task DeleteCandidateByIdAsync_ShouldReturnSuccess()
         {
             //Arrange
-            var listCandidates = CandidateMockData.EmptyList();
+            var listCandidates = _mapper.Map<List<CandidateDto>>(CandidateMockData.EmptyList());
             _candidateService.Setup(x => x.GetAllCandidatesAsync()).ReturnsAsync(listCandidates);
             var sut = new CandidateController(_candidateService.Object);
             var candidateId = new Guid("a63797fa-1c14-438c-8df9-7a07d83091ed");

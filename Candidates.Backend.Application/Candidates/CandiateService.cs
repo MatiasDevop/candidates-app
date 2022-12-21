@@ -39,11 +39,13 @@ namespace Candidates.Backend.Application.Candidates
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Candidate>> GetAllCandidatesAsync()
+        public async Task<List<CandidateDto>> GetAllCandidatesAsync()
         {
             _logger.LogInformation($"Get all Candidates...");
-
-            return await _context.Candidates.Include(c => c.Experiences).ToListAsync();
+            
+            var result = await _context.Candidates.Include(c => c.Experiences).ToListAsync();
+            
+            return _mapper.Map<List<CandidateDto>>(result); 
         }
 
         public async Task<CandidateDto> GetByIdAsync(Guid id)

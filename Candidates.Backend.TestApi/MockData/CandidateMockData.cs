@@ -32,7 +32,20 @@ namespace Candidates.Backend.TestApi.MockData
                     Birthdate = DateTime.Now,
                     Email = "pepe@test.com",
                     InsertDate = DateTime.Now,
-                    Experiences = new List<CandidateExperience>()
+                    Experiences = new List<CandidateExperience>
+                    {
+                        new CandidateExperience
+                        {
+                            CandidateExperienceId = new Guid("4a50bc58-cf93-4e0e-8447-5603a6865f61"),
+                            CandidateId = new Guid("3addc985-b9c5-4620-bfe1-16ad88e383c1"),
+                            Company = "APPLE",
+                            Job = "Developer",
+                            Description = "full time job",
+                            Salary = 4500.0m,
+                            BeginDate = DateTime.Now,
+                            InsertDate= DateTime.Now
+                        }
+                    }
                 }
             };
         }
