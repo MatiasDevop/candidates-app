@@ -14,8 +14,15 @@ namespace Candidates.Backend.Api.Controllers
             _candidateService = candidateService;
         }
 
+        /// <summary>
+        /// This Api is to get GetAllCandidatesAsync 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [Route("get-all")]
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllCandidatesAsync()
         {
             try
@@ -55,6 +62,9 @@ namespace Candidates.Backend.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 var result = await _candidateService.SaveAsync(candidate);
 
                 if (result == null) return NoContent();
@@ -84,11 +94,14 @@ namespace Candidates.Backend.Api.Controllers
             }
         }
 
-        [HttpDelete("{candidateId}")]
+        [HttpDelete("{candidateId:guid}")]
         public async Task<IActionResult> DeleteCandidateAsync(Guid candidateId)
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 await _candidateService.DeleteCandidateAsync(candidateId);
 
                 return Ok();

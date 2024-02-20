@@ -8,6 +8,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Xunit;
 
 namespace Candidates.Backend.TestApi.System.Services
 {

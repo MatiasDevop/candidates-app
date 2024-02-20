@@ -1,5 +1,4 @@
 ﻿using Candidates.Backend.Application.Dtos;
-using Candidates.Backend.Domain.Entities;
 
 namespace Candidates.Backend.Application.Candidates
 {
