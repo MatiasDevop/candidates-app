@@ -73,7 +73,6 @@ if (app.Environment.IsDevelopment())
 }
 if (app.Environment.IsStaging())
 {
-    //app.Logger.LogInformation("Current Environment is {enviromentName}", app.Environment.EnvironmentName);
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staging V1"));
 }
