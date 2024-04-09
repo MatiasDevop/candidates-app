@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidates.Backend.TestApi", "Candidates.Backend.TestApi\Candidates.Backend.TestApi.csproj", "{45CEE585-44D5-475F-A3A7-3D8ED38F7B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidate.Backend.Api.Tests", "Candidate.Backend.Api.Tests\Candidate.Backend.Api.Tests.csproj", "{DA4FC458-FCC0-4B2A-A75D-EFEAE928A2D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candidate.Backend.Api.Tests", "Candidate.Backend.Api.Tests\Candidate.Backend.Api.Tests.csproj", "{DA4FC458-FCC0-4B2A-A75D-EFEAE928A2D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candidates.Backend.Auth", "Candidates.Backend.Auth\Candidates.Backend.Auth.csproj", "{7BC4CF07-EE95-4C4D-9131-73ED72E3D374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DA4FC458-FCC0-4B2A-A75D-EFEAE928A2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA4FC458-FCC0-4B2A-A75D-EFEAE928A2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA4FC458-FCC0-4B2A-A75D-EFEAE928A2D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC4CF07-EE95-4C4D-9131-73ED72E3D374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC4CF07-EE95-4C4D-9131-73ED72E3D374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC4CF07-EE95-4C4D-9131-73ED72E3D374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC4CF07-EE95-4C4D-9131-73ED72E3D374}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,6 @@
+@Candidates.Backend.Auth_HostAddress = http://localhost:5146
+
+GET {{Candidates.Backend.Auth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
