@@ -1,85 +1,110 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using System.Runtime.Intrinsics.Arm;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
-
+const string AuthScheme = "cookie";
+const string AuthScheme2 = "cookie2";
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDataProtection();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddAuthentication(AuthScheme)
+    .AddCookie(AuthScheme)
+    .AddCookie(AuthScheme2);
+
+builder.Services.AddAuthorization(builder =>
+{
+    builder.AddPolicy("eu passport", pb =>
+    {
+        pb.RequireAuthenticatedUser()
+          .AddAuthenticationSchemes(AuthScheme)
+          .RequireClaim("passport_type", "eur");
+    });
+});
 
 var app = builder.Build();
 
-
-app.Use((ctx, next) =>
-{
-    var idp = ctx.RequestServices.GetRequiredService<IDataProtectionProvider>();
-    var protector = idp.CreateProtector("auth-cookie");
-
-    var authCookie = ctx.Request.Headers.Cookie.FirstOrDefault(x => x.StartsWith("auth="));
-    var protectedPayload = authCookie?.Split("=").Last();
-    var payload = protector.Unprotect(protectedPayload);
-    var parts = payload.Split(":");
-    var key = parts?[0];
-    var value = parts?[1];
-
-    var claims = new List<Claim>();
-    var identity = new ClaimsIdentity();
-    ctx.User = new ClaimsPrincipal();
-
-    return next();
-
-});
-// Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
+//app.Use((ctx, next) =>
+//{
+//    if (ctx.Request.Path.StartsWithSegments("/login"))
+//    {
+//        return next();
+//    }
+//    if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthScheme))
+//    {
+//        ctx.Response.StatusCode = 401;
+//        return Task.CompletedTask;
+//    }
 
-app.MapGet("/username", (HttpContext ctx) =>
-{
-  
+//    if (!ctx.User.HasClaim("passport_type", "eur"))
+//    {
+//        ctx.Response.StatusCode = 403;
+//        return Task.CompletedTask;
+//    }
 
-    return ctx.User.FindFirst("usr");
-});
+//    return next();
+//});
 
-app.MapGet("/login", (AuthService auth) =>
-{
+//app.MapGet("/unsecure", (HttpContext ctx) =>
+//{
 
-    auth.SignIn();
-    return "ok";
-});
+//    return ctx.User.FindFirst("usr")?.Value ??  "empty";
+//}).RequireAuthorization("eu passport");
+
+//app.MapGet("/sweden", (HttpContext ctx) =>
+//{
+//    if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthScheme))
+//    {
+//        ctx.Response.StatusCode = 401;
+//        return "";
+//    }
+
+//    if (!ctx.User.HasClaim("passport_type", "eur"))
+//    {
+//        ctx.Response.StatusCode = 403;
+//        return "";
+//    }
+    
+//    return "allowed";
+//});
+
+////[AuthScheme(AuthScheme2)]
+////[AuthClaim("passport_type", "eur")]
+//app.MapGet("/denmark", (HttpContext ctx) =>
+//{
+//    if (!ctx.User.Identities.Any(x => x.AuthenticationType == AuthScheme2))
+//    {
+//        ctx.Response.StatusCode = 401;
+//        return "";
+//    }
+
+//    if (!ctx.User.HasClaim("passport_type", "eur"))
+//    {
+//        ctx.Response.StatusCode = 403;
+//        return "";
+//    }
+
+//    return "allowed";
+//});
+
+//app.MapGet("/login", async (HttpContext ctx) =>
+//{
+
+//    var claims = new List<Claim>();
+//    claims.Add(new Claim("usr", "anton"));
+//    claims.Add(new Claim("passport_type", "eur"));
+//    var identity = new ClaimsIdentity(claims, AuthScheme);
+//    var user = new ClaimsPrincipal(identity);
+//    await ctx.SignInAsync(AuthScheme, user);
+//});
 
 app.MapControllers();
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
-
-
-public class AuthService
-{
-    private readonly IDataProtectionProvider _idp;
-    private readonly IHttpContextAccessor _accessor;
-
-    public AuthService(IDataProtectionProvider idp, IHttpContextAccessor ctx)
-    {
-        _idp = idp;
-        _accessor = ctx;
-    }
-
-    public void SignIn()
-    {
-        var protector = _idp.CreateProtector("auth-cookie");
-        _accessor.HttpContext.Response.Headers["set-cookie"] = $"auth={protector.Protect("usr:anton")}";
-    }
-
-
-    
-}
