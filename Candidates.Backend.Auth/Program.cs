@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(options => // Auth mechanisn for my API
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = true,
+        ValidateIssuer = false,
         ValidateAudience = false,
         RequireAudience = false,
         RequireExpirationTime = false,

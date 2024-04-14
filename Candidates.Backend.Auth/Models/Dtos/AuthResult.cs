@@ -1,4 +1,4 @@
-﻿namespace Candidates.Backend.Auth.Models
+﻿namespace Candidates.Backend.Auth.Models.Dtos
 {
     public class AuthResult
     {
